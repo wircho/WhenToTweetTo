@@ -69,7 +69,7 @@ var ONE_YEAR = ONE_DAY*365;
 
 //Database+Session
 console.log("Connecting to database: "+process.env.MONGOLAB_URI);
-mongoose.connect(process.env.MONGOLAB_URI, function(error) {
+mongoose.connect(process.env.MONGODB_URI, function(error) {
 	if (error) {
 		console.log("Error connecting to Mongo:");
 		console.log(error);
