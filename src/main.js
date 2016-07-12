@@ -319,7 +319,6 @@ const TwitterResult = React.createClass({
         <div>
           <TimezoneSelect timezone={this.props.timezone} onTimezoneChange={this.props.onTimezoneChange}/>
           <TweetChartContainer timezone={this.props.timezone} json={this.props.json} />
-          <div>Result: {JSON.stringify(this.props.json)}</div>
         </div>
       )
     }else {
@@ -542,8 +541,6 @@ function renderChart(timezone_amount,json) {
   chart.data.datasets[1].data = mentions;
   chart.data.datasets[2].data = replies;
   chart.update();
-
-  console.log(chart);
 
   return chart;
 }

@@ -46,10 +46,6 @@
 
 	'use strict';
 
-	var _stringify = __webpack_require__(1);
-
-	var _stringify2 = _interopRequireDefault(_stringify);
-
 	var _promise = __webpack_require__(4);
 
 	var _promise2 = _interopRequireDefault(_promise);
@@ -464,13 +460,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(TimezoneSelect, { timezone: this.props.timezone, onTimezoneChange: this.props.onTimezoneChange }),
-	        _react2.default.createElement(TweetChartContainer, { timezone: this.props.timezone, json: this.props.json }),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          'Result: ',
-	          (0, _stringify2.default)(this.props.json)
-	        )
+	        _react2.default.createElement(TweetChartContainer, { timezone: this.props.timezone, json: this.props.json })
 	      );
 	    } else {
 	      return false;
@@ -719,8 +709,6 @@
 	  chart.data.datasets[2].data = replies;
 	  chart.update();
 
-	  console.log(chart);
-
 	  return chart;
 	}
 
@@ -919,22 +907,8 @@
 	), document.getElementById('content'));
 
 /***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(2), __esModule: true };
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(3)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-/***/ },
+/* 1 */,
+/* 2 */,
 /* 3 */
 /***/ function(module, exports) {
 
