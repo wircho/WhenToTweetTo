@@ -68,7 +68,6 @@ var TWO_WEEKS = ONE_WEEK*2;
 var ONE_YEAR = ONE_DAY*365;
 
 //Database+Session
-console.log("Connecting to database: "+process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI, function(error) {
 	if (error) {
 		console.log("Error connecting to Mongo:");

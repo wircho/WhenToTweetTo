@@ -353,7 +353,7 @@ const TweetChartContainer = React.createClass({
     var offset = timezoneOffset(this.props.timezone);
     var amount = arrayOffset(offset);
     var index = (this.props.json.index + 48 - amount) % 48;
-    var totalMinutes = index * 30 + 15;
+    var totalMinutes = index * 30;
     var hours = Math.floor(totalMinutes / 60);
     var minutes = totalMinutes - hours * 60;
     return (
