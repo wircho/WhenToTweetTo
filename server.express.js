@@ -223,6 +223,16 @@ function processTwitterStatus(status) {
 	return result;
 }
 
+function timestampSortingFunction(a,b) {
+	if (a.time > b.time) {
+		return -1;
+	}else if (a.time < b.time) {
+		return 1;
+	}else {
+		return 0;
+	}
+}
+
 function getTwitterUserTimeline(req,screenName,maxId,accessToken,accessTokenSecret) {
 	var params = {
 		screen_name:screenName,
@@ -258,17 +268,8 @@ function getTwitterUserTimeline(req,screenName,maxId,accessToken,accessTokenSecr
 		    		}else if (data.constructor !== Array) {
 		    			rej(err("Bad data type."));
 		    		}else {
-		    			var processedData = data.map(processTwitterStatus).sort(function(a,b) {
-		    				if (a.time > b.time) {
-		    					return -1;
-		    				}else if (a.time < b.time) {
-		    					return 1;
-		    				}else {
-		    					return 0;
-		    				}
-		    			});
-		    			console.log("Processed data:");
-		    			console.log(processedData);
+		    			var processedData = data.map(processTwitterStatus).sort(timestampSortingFunction);
+		    			console.log("Processed data: " + processedData.length);
 		    			if (data.length < 1) {
 		    				res({data:processedData});
 		    			}else {
