@@ -68,7 +68,7 @@ var TWO_WEEKS = ONE_WEEK*2;
 var ONE_YEAR = ONE_DAY*365;
 
 //Database+Session
-console.log("Connecting to database: "+process.env.MONGOLAB_URI);
+console.log("Connecting to database: "+process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI, function(error) {
 	if (error) {
 		console.log("Error connecting to Mongo:");
@@ -98,7 +98,7 @@ var TwitterAPI = require('node-twitter-api');
 var twitter = new TwitterAPI({
     consumerKey: 'gx3LcGvSXR4EUerGm1RKaRJnI',
     consumerSecret: 'CP8nVMHJG51Iyy93jQewJfogAMeoeayDIwFAcc78OPKdL5El8z',
-    callback: 'http://localhost:8080/twitter_callback'
+    callback: process.env.TWITTER_CALLBACK_URI
 });
 
 //api/twitter/auth_info

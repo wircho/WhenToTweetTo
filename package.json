@@ -39,7 +39,7 @@
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run dev",
-    "start-local": "export MONGODB_URI=\"mongodb://localhost:27017/when-tweet\"; npm run dev"
+    "start-local": "export TWITTER_CALLBACK_URI=\"http://localhost:8080/twitter_callback\"; export MONGODB_URI=\"mongodb://localhost:27017/when-tweet\"; npm run dev"
   },
   "author": "Trovy Apps",
   "repository": {
