@@ -1,14 +1,22 @@
 import express from 'express';
-var bodyParser 		= require('body-parser');
-var cookieParser 	= require('cookie-parser');
-var session      	= require('express-session');
-var mongoose 		= require('mongoose');
-var MongoStore 		= require('connect-mongo')(session);
-const app 			= express();
+var bodyParser 				= require('body-parser');
+var cookieParser 			= require('cookie-parser');
+var session      			= require('express-session');
+var mongoose 				= require('mongoose');
+var MongoStore 				= require('connect-mongo')(session);
+var moment 					= require('moment');
+const app 					= express();
+const MONGODB_URI 			= fallback(process.env.MONGODB_URI,"mongodb://localhost:27017/when-tweet");
+const MONGODB_SECRET		= fallback(process.env.MONGODB_SECRET,"uy7gn7gn78g7");
+const TWITTER_CALLBACK_URI	= fallback(process.env.TWITTER_CALLBACK_URI,"http://localhost:8080/twitter_callback");
 
 //Utilities
 function def(x) {
 	return typeof x !== 'undefined';
+}
+
+function fallback(x,y) {
+	return def(x) ? x : y;
 }
 
 function err(error) {
@@ -68,7 +76,7 @@ var TWO_WEEKS = ONE_WEEK*2;
 var ONE_YEAR = ONE_DAY*365;
 
 //Database+Session
-mongoose.connect(process.env.MONGODB_URI, function(error) {
+mongoose.connect(MONGODB_URI, function(error) {
 	if (error) {
 		console.log("Error connecting to Mongo:");
 		console.log(error);
@@ -79,7 +87,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
     cookie: { maxAge: ONE_YEAR } ,
-    secret: "uy7gn7gn78g7" ,
+    secret: MONGODB_SECRET ,
     resave: true,
     saveUninitialized: true,
     store:new MongoStore({
@@ -97,7 +105,7 @@ var TwitterAPI = require('node-twitter-api');
 var twitter = new TwitterAPI({
     consumerKey: 'gx3LcGvSXR4EUerGm1RKaRJnI',
     consumerSecret: 'CP8nVMHJG51Iyy93jQewJfogAMeoeayDIwFAcc78OPKdL5El8z',
-    callback: process.env.TWITTER_CALLBACK_URI
+    callback: TWITTER_CALLBACK_URI
 });
 
 //api/twitter/auth_info
@@ -189,7 +197,7 @@ app.get('/api/twitter/access_token', function (req, res) {
 
 //Twitter user helpers
 function getTwitterTimestamp(date) {
-	return Date.parse(date);
+	return moment(date,"ddd MMM DD HH:mm:ss ZZ YYYY") + 0;
 }
 
 function processTwitterStatus(status) {

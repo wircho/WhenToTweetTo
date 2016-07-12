@@ -6,13 +6,13 @@ import { createStore } from 'redux'
 import Immutable from 'immutable'
 import $ from 'jquery'
 import Chart from 'chart.js'
-var moment = require('moment-timezone');
+var moment_tz = require('moment-timezone').tz;
 
 //Time Zones
-var timezones = moment.tz.names();
-var defaultTimezone = moment.tz.guess();
+var timezones = moment_tz.names();
+var defaultTimezone = moment_tz.guess();
 function timezoneOffset(timezoneName) {
-  return moment.tz.zone(timezoneName).offset(Date.now());
+  return moment_tz.zone(timezoneName).offset(Date.now());
 }
 
 //Utilities
