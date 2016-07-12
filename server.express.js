@@ -398,7 +398,7 @@ app.get('/api/twitter/user', function (req, res) {
 				equals += 1;
 			}
 		}
-		res.json({screen_name,days,tweets,discarded,replies,mentions,totals,index:(equals > maxEquals) ? (-1) : index});
+		res.json({data,screen_name,days,tweets,discarded,replies,mentions,totals,index:(equals > maxEquals) ? (-1) : index});
 	}, function(error) {
 		res.json(errdict(error));
 	});
