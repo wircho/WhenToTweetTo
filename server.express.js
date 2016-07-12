@@ -197,7 +197,9 @@ app.get('/api/twitter/access_token', function (req, res) {
 
 //Twitter user helpers
 function getTwitterTimestamp(date) {
-	return moment(date,"ddd MMM DD HH:mm:ss ZZ YYYY") + 0;
+	var t = moment(date,"ddd MMM DD HH:mm:ss ZZ YYYY") + 0;
+	console.log(date+" --> "+t);
+	return t;
 }
 
 function processTwitterStatus(status) {
