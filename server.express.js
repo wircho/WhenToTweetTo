@@ -258,9 +258,17 @@ function getTwitterUserTimeline(req,screenName,maxId,accessToken,accessTokenSecr
 		    		}else if (data.constructor !== Array) {
 		    			rej(err("Bad data type."));
 		    		}else {
-		    			console.log("full data:");
-		    			console.log(data);
-		    			var processedData = data.map(processTwitterStatus);
+		    			var processedData = data.map(processTwitterStatus).sort(function(a,b) {
+		    				if (a.time > b.time) {
+		    					return -1;
+		    				}else if (a.time < b.time) {
+		    					return 1;
+		    				}else {
+		    					return 0;
+		    				}
+		    			});
+		    			console.log("Processed data:");
+		    			console.log(processedData);
 		    			if (data.length < 1) {
 		    				res({data:processedData});
 		    			}else {
