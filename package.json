@@ -41,5 +41,10 @@
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Trovy Apps"
+  "author": "Trovy Apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wircho/WhenToTweetTo"
+  },
+  "license": "MIT"
 }
