@@ -166,8 +166,8 @@ app.get('/api/twitter/auth_info', function (req, res) {
 
 //api/twitter/access_token
 app.get('/api/twitter/access_token', function (req, res) {
-	var oauthToken = req.param('oauth_token');
-	var oauthVerifier = req.param('oauth_verifier');
+	var oauthToken = req.query['oauth_token'];
+	var oauthVerifier = req.query['oauth_verifier'];
 	if (def(req.session.twitter) && def(req.session.twitter.requestTokenSecret)) {
 		twitter.getAccessToken(oauthToken, req.session.twitter.requestTokenSecret, oauthVerifier, function(error, accessToken, accessTokenSecret, results) {
 		    if (error || !def(accessToken) || !def(accessTokenSecret)) {
@@ -320,8 +320,8 @@ app.get('/api/twitter/user', function (req, res) {
 		res.json(errdict("Session expired."));
 		return;
 	}
-	var screenName = req.param('screen_name');
-	var accessToken = req.param('access_token');
+	var screenName = req.query['screen_name'];
+	var accessToken = req.query['access_token'];
 	var storedAccessToken = twitterInfo.accessToken;
 	var accessTokenSecret = twitterInfo.accessTokenSecret;
 	if (
@@ -435,8 +435,8 @@ app.get('/api/twitter/logout', function (req, res) {
 
 //twitter_callback
 app.get('/twitter_callback', function (req, res) {
-	var oauthToken = req.param('oauth_token');
-	var oauthVerifier = req.param('oauth_verifier');
+	var oauthToken = req.query['oauth_token'];
+	var oauthVerifier = req.query['oauth_verifier'];
 	res.send("<html><head><title>Close this tab.</title></head><body>"
 		+ "<script type='text/javascript'>var twitter"
 		+ " = {oauth_token:'"+oauthToken+"',oauth_verifier:'"+oauthVerifier+"'};"
