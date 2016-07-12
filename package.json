@@ -30,9 +30,7 @@
     "react-dom": "^15.2.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
-    "webpack": "^1.13.1"
-  },
-  "devDependencies": {
+    "webpack": "^1.13.1",
     "concurrently": "^2.1.0"
   },
   "scripts": {
@@ -40,7 +38,8 @@
     "express-server": "node ./server",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "start-local": "export MONGOLAB_URI=\"mongodb://localhost:27017/when-tweet\"; npm run dev"
   },
   "author": "Trovy Apps",
   "repository": {

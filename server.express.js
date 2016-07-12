@@ -5,7 +5,6 @@ var session      	= require('express-session');
 var mongoose 		= require('mongoose');
 var MongoStore 		= require('connect-mongo')(session);
 const app 			= express();
-const con 			= require('./connection');
 
 //Utilities
 function def(x) {
@@ -69,13 +68,18 @@ var TWO_WEEKS = ONE_WEEK*2;
 var ONE_YEAR = ONE_DAY*365;
 
 //Database+Session
-mongoose.connect(con.mongoDB);
+mongoose.connect(process.env.MONGOLAB_URI, function(error) {
+	if (error) {
+		console.log("Error connecting to Mongo:");
+		console.log(error);
+	}
+});
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
     cookie: { maxAge: ONE_YEAR } ,
-    secret: con.mongoSecret ,
+    secret: "uy7gn7gn78g7" ,
     resave: true,
     saveUninitialized: true,
     store:new MongoStore({
