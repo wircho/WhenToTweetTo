@@ -469,7 +469,7 @@
 	          'div',
 	          null,
 	          'Result: ',
-	          (0, _stringify2.default)(this.props.json.data)
+	          (0, _stringify2.default)(this.props.json)
 	        )
 	      );
 	    } else {

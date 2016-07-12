@@ -351,11 +351,11 @@ app.get('/api/twitter/user', function (req, res) {
 		var now = Date.now();
 		var days = Math.floor((now - last) / ONE_DAY);
 		var allowed = now - days * ONE_DAY;
-		while (def(last) && last < allowed) {
-			data.pop();
-			discarded += 1;
-			last = (data.length > 0) ? data[data.length - 1].time : undefined;
-		}
+		// while (def(last) && last < allowed) {
+		// 	data.pop();
+		// 	discarded += 1;
+		// 	last = (data.length > 0) ? data[data.length - 1].time : undefined;
+		// }
 		var times = data.map((status)=>(status.time));
 		var tweets = data.length;
 		var counts = data.map(function(status) {
@@ -398,7 +398,7 @@ app.get('/api/twitter/user', function (req, res) {
 				equals += 1;
 			}
 		}
-		res.json({data,screen_name,days,tweets,discarded,replies,mentions,totals,index:(equals > maxEquals) ? (-1) : index});
+		res.json({now,data,screen_name,days,tweets,discarded,replies,mentions,totals,index:(equals > maxEquals) ? (-1) : index});
 	}, function(error) {
 		res.json(errdict(error));
 	});
