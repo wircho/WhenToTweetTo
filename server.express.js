@@ -197,9 +197,11 @@ app.get('/api/twitter/access_token', function (req, res) {
 
 //Twitter user helpers
 function getTwitterTimestamp(date) {
-	var t = moment(date,"ddd MMM DD HH:mm:ss ZZ YYYY") + 0;
-	console.log(date+" --> "+t);
-	return t;
+	return moment(date,"ddd MMM DD HH:mm:ss ZZ YYYY") + 0;
+}
+
+function utcHours(timestamp) {
+	return moment(timestamp).utc().hours();
 }
 
 function processTwitterStatus(status) {
@@ -270,7 +272,6 @@ function getTwitterUserTimeline(req,screenName,maxId,accessToken,accessTokenSecr
 		    		}else {
 		    			var processedData = data.map(processTwitterStatus);
 		    			processedData.sort(timestampSortingFunction);
-		    			console.log("Processed data: " + processedData.length);
 		    			if (data.length < 1) {
 		    				res({data:processedData});
 		    			}else {
@@ -351,16 +352,16 @@ app.get('/api/twitter/user', function (req, res) {
 		var now = Date.now();
 		var days = Math.floor((now - last) / ONE_DAY);
 		var allowed = now - days * ONE_DAY;
-		// while (def(last) && last < allowed) {
-		// 	data.pop();
-		// 	discarded += 1;
-		// 	last = (data.length > 0) ? data[data.length - 1].time : undefined;
-		// }
+		while (def(last) && last < allowed) {
+			data.pop();
+			discarded += 1;
+			last = (data.length > 0) ? data[data.length - 1].time : undefined;
+		}
 		var times = data.map((status)=>(status.time));
 		var tweets = data.length;
 		var counts = data.map(function(status) {
-			var hour = (new Date(status.time)).getHours();
-			var hour1 = (new Date(status.time+HALF_HOUR)).getHours();
+			var hour = utcHours(status.time);
+			var hour1 = utcHours(status.time+HALF_HOUR);
 			var half_hour = (hour === hour1) ? (2*hour) : (2*hour + 1);
 			return {
 				half_hour,
