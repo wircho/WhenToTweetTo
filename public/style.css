@@ -1,0 +1,95 @@
+body, html {
+	margin:0px;
+	padding:0px;
+	font-family:sans-serif;
+}
+
+body {
+	padding-top:40px;
+	text-align:center;
+}
+
+#logged-in-header {
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	padding:5px;
+	background:green;
+	text-align:left;
+	color:white;
+}
+
+#logged-in-header > a, #logged-in-header > a:visited {
+	color:white;
+}
+
+#twitter-form {
+
+}
+
+#twitter-at-sign {
+	font-size:20px;
+}
+
+#twitter-name-field {
+	font-size:20px;
+	border:none;
+	background:lightgray;
+	padding:4px;
+	border-radius:3px;
+}
+
+#twitter-go-button {
+	font-size:20px;
+	border:none;
+	background:gray;
+	color:white;
+	border-radius:4px;
+	cursor:pointer;
+}
+
+#twitter-name-field[disabled], #twitter-go-button[disabled] {
+	opacity: 0.5;
+}
+
+#twitter-warning {
+	width:300px;
+	background:red;
+	display:inline-block;
+	margin-top:10px;
+	margin-bottom:10px;
+	border-radius:5px;
+	padding:5px;
+	font-size:15px;
+	color:white;
+}
+
+#chart-container {
+	position:relative;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+#chart {
+	position:relative;
+}
+
+#chart-top {
+	padding:5px;
+}
+
+#chart-overlay {
+	position:absolute;
+	pointer-events:none;
+}
+
+#chart-bar {
+	position:absolute;
+	top:0px;
+	bottom:0px;
+}
+
+#chart-top, #chart-bar {
+	background:rgba(255,255,0,0.4);
+}
