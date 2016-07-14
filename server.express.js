@@ -6,7 +6,7 @@ var mongoose 				= require('mongoose');
 var MongoStore 				= require('connect-mongo')(session);
 var moment 					= require('moment');
 const app 					= express();
-const MONGODB_URI 			= fallback(process.env.MONGODB_URI,"mongodb://localhost:27017/when-tweet");
+const MONGODB_URI 			= fallback(process.env.MONGODB_URI,"mongodb://localhost:27017/my-db");
 const MONGODB_SECRET		= fallback(process.env.MONGODB_SECRET,"uy7gn7gn78g7");
 const TWITTER_CALLBACK_URI	= fallback(process.env.TWITTER_CALLBACK_URI,"http://localhost:8080/twitter_callback");
 
