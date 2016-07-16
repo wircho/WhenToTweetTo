@@ -65,6 +65,40 @@ function geterr(data) {
 	return !def(str) ? undefined : err(str);
 }
 
+function projf() {
+  var args = Array.prototype.slice.call(arguments);
+  var f = args[0];
+  var globalArray = args.slice(1);
+  return function() {
+    var args = Array.prototype.slice.call(arguments);
+    var array = globalArray.slice();
+    for (var i=0; i<array.length; i+=1) {
+      if (!def(array[i])) {
+        array[i] = args.shift();
+      }
+    }
+    array = array.concat(args);
+    return f.apply(this,array);
+  }
+}
+
+function projff() {
+  var args = Array.prototype.slice.call(arguments);
+  var f = args[0];
+  var globalArray = args.slice(1);
+  return function() {
+    var args = Array.prototype.slice.call(arguments);
+    var array = globalArray.map(x=>(def(x) ? x() : undefined));
+    for (var i=0; i<array.length; i+=1) {
+      if (!def(array[i])) {
+        array[i] = args.shift();
+      }
+    }
+    array = array.concat(args);
+    return f.apply(this,array);
+  }
+}
+
 //Time constants
 var ONE_MINUTE = 1000*60;
 var TWO_MINUTES = ONE_MINUTE*2;
