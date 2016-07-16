@@ -593,7 +593,6 @@ function app(state, action) {
       break;
     case TwitterAction.ERROR:
       return mutate(remove(state,["twitter","twitter_error","twitter_auth_request","user_info","user_error","twitter_remaining","twitter_remaining_time","loading"]),{twitter_error:action.error});
-      return newState;
       break;
     case TwitterAction.SHOW_AUTH_SCREEN:
       return mutate(remove(state,["twitter","twitter_error","twitter_auth_request","user_info","user_error","twitter_remaining","twitter_remaining_time","loading"]),{twitter_auth_request:action.info});
@@ -632,9 +631,8 @@ window.twitterCallback = function(win,info) {
 
 //Redux setup
 const store = createStore(app);
-const mapStateToProps = (state) => {
-  return state;
-}
+const mapStateToProps = state=>state;
+
 var loadingToken = {cancelled:false};
 var resetLoadingToken = function(dispatch) {
   loadingToken.cancelled = true;
